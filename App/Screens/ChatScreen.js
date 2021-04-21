@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react'
+import { GiftedChat } from 'react-native-gifted-chat'
 import { Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -7,6 +8,27 @@ import { Ionicons } from '@expo/vector-icons';
 import { Images } from '../Themes';
 
 export default function ChatScreen({ navigation }) {
+  const [messages, setMessages] = useState([]);
+
+
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: 'Hello developer',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+    ])
+  }, [])
+
+  const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -18,7 +40,13 @@ export default function ChatScreen({ navigation }) {
         {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
       </View>
       <View style={styles.messageContainer}>
-        <Text>Messages here!</Text>
+        <GiftedChat
+          messages={messages}
+          onSend={messages => onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
       </View>
 
     </View>
@@ -55,6 +83,12 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   messageContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#6CEDFF',
+    height: '88%',
+    width: '100%' 
   }
 });
