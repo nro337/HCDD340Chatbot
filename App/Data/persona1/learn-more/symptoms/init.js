@@ -1,0 +1,10 @@
+[
+    {
+        text: "CLEAR"
+    },
+    {
+        text: "PTSD includes 4 types of symptoms",
+        options: ["Tell me about the first symptom"],
+        dialogue: ["learn-more/symptoms/intro/first.json"]
+    }
+]
