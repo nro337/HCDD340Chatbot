@@ -1,3 +1,5 @@
+import {Images} from '../../Themes'
+
 const startconversation = [
     {
         _id: 1,
@@ -5,7 +7,7 @@ const startconversation = [
         user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
+            avatar: Images.robot,
         },
     },
     {
@@ -13,7 +15,7 @@ const startconversation = [
         user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
+            avatar: Images.robot,
         },
         text: "In order to get to know you better, let's take an assessment first, shall we?",
         //options: ["Sure", "Later"],

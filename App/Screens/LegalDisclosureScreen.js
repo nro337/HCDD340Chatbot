@@ -69,9 +69,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     medicalDisclosureText: {
+        textAlign: 'center',
         ...human.body,
         paddingTop: 10
     }

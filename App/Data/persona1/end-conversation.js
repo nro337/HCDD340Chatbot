@@ -1,3 +1,6 @@
+import {Images} from '../../Themes'
+
+
 const endconversation = [
     {
         _id: 1,
@@ -5,7 +8,7 @@ const endconversation = [
         user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
+            avatar: Images.robot,
         },
     },
     {
@@ -14,7 +17,7 @@ const endconversation = [
         user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
+            avatar: Images.robot,
         },
         //options: ["MENU"],
         //dialogue: ["menu.js"]
