@@ -54,7 +54,7 @@ const take_assessment_high = [
                     value: "manage-symptoms/init.js",
                 },
                 {
-                    title: 'Low',
+                    title: 'Get Support',
                     value: "get-support/immediate.js",
                 },
             ],

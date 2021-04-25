@@ -598,7 +598,7 @@ const take_assessment_survey = [
         //dialogue: ["take-assessment/score.js", "take-assessment/score.js", "take-assessment/score.js", "take-assessment/score.js", "take-assessment/score.js"]
     },
     {
-        _id: 17,
+        _id: 19,
         text: "Have you sent all your answers? If so, click next to see your score!",
         user: {
             _id: 2,
