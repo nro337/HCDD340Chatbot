@@ -18,13 +18,18 @@ import manage_symptoms_feel_good from '../Data/persona1/manage-symptoms/feel-goo
 import get_support_tool_list from '../Data/persona1/get-support/tool-list'
 import take_assessment_start from '../Data/persona1/take-assessment/start'
 import take_assessment_survey from '../Data/persona1/take-assessment/survey'
+import take_assessment_score from '../Data/persona1/take-assessment/score'
+import take_assessment_result from '../Data/persona1/take-assessment/result'
+import get_support_immediate from '../Data/persona1/get-support/immediate'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import { Images } from '../Themes';
+import take_assessment_high from '../Data/persona1/take-assessment/high';
 
 export default function ChatScreen({ navigation }) {
+  var assessmentReplies = []
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -41,7 +46,8 @@ export default function ChatScreen({ navigation }) {
       //     },
       //   },
       // ]
-    )
+    );
+    assessmentReplies = []
   }, [])
 
   const onSend = useCallback((messages = []) => {
@@ -51,6 +57,12 @@ export default function ChatScreen({ navigation }) {
 
   function fetchFile(index) {
     console.log(index[0].value)
+    console.log(index)
+    if (index[0].value === "not_at_all" || index[0].value === "a_little_bit" || index[0].value === "moderately" || index[0].value === "quite_a_bit" || index[0].value === "extremely") {
+      assessmentReplies.push(index[0].value)
+      console.log(assessmentReplies)
+    }
+
     if (index[0].value == "welcome.js") {
       (welcome[0].text === 'CLEAR') ? setMessages(welcome.reverse()) : setMessages(welcome)
     }
@@ -91,16 +103,28 @@ export default function ChatScreen({ navigation }) {
       (manage_symptoms_perspective_change_5[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_5.reverse()) : setMessages(manage_symptoms_perspective_change_5)
     }
     if (index[0].value == "manage-symptoms/feel-good.js") {
-      (manage_symptoms_feel_good[0].text === 'CLEAR') ? setMessages(manage_symptoms_feel_good.reverse()) : setMessages(manage_symptoms_feel_good)
+      (manage_symptoms_feel_good[0].text === 'Great!') ? setMessages(manage_symptoms_feel_good.reverse()) : setMessages(manage_symptoms_feel_good)
     }
     if (index[0].value == "get-support/tool-list.js") {
       (get_support_tool_list[0].text === 'CLEAR') ? setMessages(get_support_tool_list.reverse()) : setMessages(get_support_tool_list)
     }
     if (index[0].value == "take-assessment/start.js") {
-      (take_assessment_start[0].text === 'CLEAR') ? setMessages(take_assessment_start.reverse()) : setMessages(take_assessment_start)
+      (take_assessment_start[0].text === "Great! Let's get started.") ? setMessages(take_assessment_start.reverse()) : setMessages(take_assessment_start)
     }
     if (index[0].value == "take-assessment/survey.js") {
-      (take_assessment_start[0].text === 'CLEAR') ? setMessages(take_assessment_start.reverse()) : setMessages(take_assessment_start)
+      (take_assessment_survey[0].text === 'CLEAR') ? setMessages(take_assessment_survey.reverse()) : setMessages(take_assessment_survey)
+    }
+    if (index[0].value == "take-assessment/score.js") {
+      (take_assessment_score[0].text === 'Thank you for answering the questions!') ? setMessages(take_assessment_score.reverse()) : setMessages(take_assessment_score)
+    }
+    if (index[0].value == "take-assessment/result.js") {
+      (take_assessment_result[0].text === 'CLEAR') ? setMessages(take_assessment_result.reverse()) : setMessages(take_assessment_result)
+    }
+    if (index[0].value == "take-assessment/high.js") {
+      (take_assessment_high[0].text === 'CLEAR') ? setMessages(take_assessment_high.reverse()) : setMessages(take_assessment_high)
+    }
+    if (index[0].value == "get-support/immediate.js") {
+      (get_support_immediate[0].text === 'I would like to provide contacts that you could get some immediate support.') ? setMessages(get_support_immediate.reverse()) : setMessages(get_support_immediate)
     }
   }
 

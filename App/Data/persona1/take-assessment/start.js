@@ -12,7 +12,7 @@ const take_assessment_start = [
     },
     {
         _id: 2,
-        text: "I will ask you a couple of questions. <br /> Your answer will help me to better understand you.",
+        text: "I will ask you a couple of questions. Your answer will help me to better understand you.",
         user: {
             _id: 2,
             name: 'React Native',
@@ -32,3 +32,5 @@ const take_assessment_start = [
         // dialogue: ["take-assessment/survey.js"]
     }
 ]
+
+export default take_assessment_start

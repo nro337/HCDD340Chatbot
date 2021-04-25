@@ -24,6 +24,18 @@ export default function AssistanceLinksScreen({ navigation }) {
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
+                    <Text style={styles.linkRowLabel}>National Domestic Violence Hotline</Text>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18007997233')} ></Button>
+                </View>
+            </View>
+            <View style={styles.linkContainer}>
+                <View style={styles.linkRow}>
+                    <Text style={styles.linkRowLabel}>National Sexual Assault Hotline</Text>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18006564673')} ></Button>
+                </View>
+            </View>
+            <View style={styles.linkContainer}>
+                <View style={styles.linkRow}>
                     <Text style={styles.linkRowLabel}>SAMHSA Hotline</Text>
                     <Button title="Call" onPress={() => Linking.openURL('tel: +18006624357')} ></Button>
                 </View>

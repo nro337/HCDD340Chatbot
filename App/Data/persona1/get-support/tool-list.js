@@ -48,3 +48,5 @@ const get_support_tool_list = [
         // dialogue: ["manage-symptoms/init.js","take-assessment/start.js", "get-support/immediate.js", "learn-more/init.js", "track-progress/init.js"]
     }
 ]
+
+export default get_support_tool_list
