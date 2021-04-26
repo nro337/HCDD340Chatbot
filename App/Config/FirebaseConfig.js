@@ -12,3 +12,7 @@ import "firebase/firestore"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  const firestore = firebase.firestore();
+
+  export default firestore
