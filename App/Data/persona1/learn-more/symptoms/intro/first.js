@@ -1,4 +1,4 @@
-import {Images} from '../../../Themes'
+import {Images} from '../../../../../Themes'
 
 const learn_more_symptoms_intro_first = [
     {

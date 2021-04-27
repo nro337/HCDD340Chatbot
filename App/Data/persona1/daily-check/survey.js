@@ -1,4 +1,6 @@
-[
+import {Images} from '../../../Themes'
+
+const daily_check_survey = [
     {
         text: "Great! Let's start it"
     },
@@ -35,3 +37,5 @@
         dialogue: ["daily-check/score.js", "daily-check/score.js", "daily-check/score.js", "daily-check/score.js", "daily-check/score.js"]
     }
 ]
+
+export default daily_check_survey

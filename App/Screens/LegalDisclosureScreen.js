@@ -13,7 +13,10 @@ export default function LegalDisclosureScreen({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
                     <Ionicons name={"menu"} size={32} color={"black"} style={{ marginLeft: 10 }} />
                 </TouchableOpacity>
-                <Text>Legal Disclosures</Text>
+                <Text style={styles.pageTitle}>Legal Disclosures</Text>
+                <View style={styles.signOut}>
+                    <Button title='Sign Out' onPress={() => signout()} ></Button>
+                </View>
                 {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
             </View>
             <View style={styles.linkContainer}>
@@ -43,11 +46,26 @@ const styles = StyleSheet.create({
     header: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         height: Dimensions.get("screen").height * 0.1,
         width: Dimensions.get("window").width,
         backgroundColor: "white"
+    },
+    pageTitle: {
+        ...human.title3,
+        ...Platform.select({
+            ios: {
+                marginLeft: 40,
+            },
+            android: {
+                marginLeft: 0,
+            },
+            default: {
+                marginLeft: 0,
+            }
+        })
+        
     },
     linkContainer: {
         display: 'flex',
@@ -75,5 +93,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         ...human.body,
         paddingTop: 10
-    }
+    },
+    signOut: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        // paddingLeft: '15%'
+    },
 });

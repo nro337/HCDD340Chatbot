@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import { human } from 'react-native-typography'
 import * as Linking from 'expo-linking';
 
@@ -13,7 +13,10 @@ export default function AssistanceLinksScreen({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
                     <Ionicons name={"menu"} size={32} color={"black"} style={{ marginLeft: 10 }} />
                 </TouchableOpacity>
-                <Text>Additional Resources</Text>
+                <Text style={styles.pageTitle}>Additional Resources</Text>
+                <View style={styles.signOut}>
+                    <Button title='Sign Out' onPress={() => signout()} ></Button>
+                </View>
                 {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
             </View>
             <View style={styles.linkContainer}>
@@ -69,11 +72,26 @@ const styles = StyleSheet.create({
     header: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         height: Dimensions.get("screen").height * 0.1,
         width: Dimensions.get("window").width,
         backgroundColor: "white"
+    },
+    pageTitle: {
+        ...human.title3,
+        ...Platform.select({
+            ios: {
+                marginLeft: 40,
+            },
+            android: {
+                marginLeft: 0,
+            },
+            default: {
+                marginLeft: 0,
+            }
+        })
+        
     },
     linkContainer: {
         display: 'flex',
@@ -90,5 +108,12 @@ const styles = StyleSheet.create({
     },
     linkRowLabel: {
         ...human.title3
-    }
+    },
+    signOut: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        // paddingLeft: '15%'
+    },
 });

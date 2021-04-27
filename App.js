@@ -1,20 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native';
+import firebase from 'firebase';
+import "firebase/auth"
 
 import AppNavigation from './App/Navigation/AppNavigation'
+import LoginScreen from './App/Screens/LoginScreen';
 
 export default function App() {
-  return (
-    <SafeAreaView>
-      <StatusBar style="auto" />
-      <View style={styles.container}>
-        {/* <Text>Open up App.js to start working on your app!</Text> */}
+  const [loggedIn, setLoggedIn] = useState(false);
 
-        <AppNavigation />
-      </View>
-    </SafeAreaView>
-  );
+  if (loggedIn) {
+    return (
+      <SafeAreaView>
+        <StatusBar style="auto" />
+        <View style={styles.container}>
+
+          <AppNavigation updateStatus={(val) => setLoggedIn(val)} />
+        </View>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView>
+        <StatusBar style="auto" />
+        <View style={styles.container}>
+
+          <LoginScreen updateStatus={(val) => setLoggedIn(val)} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+
 }
 
 const styles = StyleSheet.create({

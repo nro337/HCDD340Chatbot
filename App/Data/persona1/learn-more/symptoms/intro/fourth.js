@@ -1,4 +1,4 @@
-import {Images} from '../../../Themes'
+import {Images} from '../../../../../Themes'
 
 const learn_more_symptoms_intro_fourth = [
     {
@@ -11,7 +11,7 @@ const learn_more_symptoms_intro_fourth = [
         },
     },
     {
-        _id: 1,
+        _id: 2,
         text: "Fourth symptom is feeling more on-edge and reactive",
         user: {
             _id: 2,
