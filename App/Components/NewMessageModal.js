@@ -186,7 +186,7 @@ const NewMessageModal = (props) => {
                             textAlign: 'center',
                             color: colors.text
                         }}>New Journal Entry</Text>
-                        <Button title='Close' onPress={props.bottomSheetParentState}></Button>
+                        <Button title='Close' onPress={props.bottomSheetParentState} accessible={true} accessibilityHint="Close journal entry bottom sheet"></Button>
                         <TextInput
                             placeholder="Enter journal entry here..."
                             editable={true}
@@ -205,13 +205,14 @@ const NewMessageModal = (props) => {
                                 borderRightColor: colors.text,
                                 borderBottomColor: colors.text
                             }}
-                            onChangeText={setInputText}
+                            onChangeText={(text) => setInputText(text)}
+                            //value={inputText}
                             // onFocus={() => setTextFocus(true)}
                             ref={textInput}
-                            onSubmitEditing={Keyboard.dismiss}
+                            onSubmitEditing={Keyboard.dismiss()}
 
                         />
-                        <Button title="Post" onPress={() => postJournalEntry(firebase.auth().currentUser.uid, Date.now(), inputText.trim())}></Button>
+                        <Button title="Post" onPress={() => postJournalEntry(firebase.auth().currentUser.uid, Date.now(), inputText.trim())} accessible={true} accessibilityHint="Post journal entry button"></Button>
                         {/* () => postJournalEntry(firebase.auth().currentUser.uid, 'Wow what a message__') */}
                     </View>
 

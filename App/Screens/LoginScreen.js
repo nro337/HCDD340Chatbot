@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TextInput, Button, Dimensions, Alert } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TextInput, Button, Dimensions, Alert, Platform } from 'react-native';
+import { useAccessibilityInfo } from '@react-native-community/hooks'
 import { human, material } from 'react-native-typography';
 import firestore from '../Config/FirebaseConfig';
 import firebase from 'firebase';
@@ -72,6 +73,8 @@ export default function LoginScreen(props) {
                         value={loginEmail}
                         onChangeText={(loginEmail) => setLoginEmail(loginEmail)}
                         placeholder="Email"
+                        accessible={true}
+                        accessibilityLabel="Login"
                     />
                     <TextInput
                         style={styles.input}
@@ -79,6 +82,8 @@ export default function LoginScreen(props) {
                         secureTextEntry={true}
                         onChangeText={(loginPassword) => setLoginPassword(loginPassword)}
                         placeholder="Password"
+                        accessible={true}
+                        accessibilityLabel="Password"
                     />
                 </View>
 
@@ -86,13 +91,21 @@ export default function LoginScreen(props) {
                     <Button
                         title='Login'
                         onPress={() => login()}
-                        color='black'
+                        color={Platform.OS === 'ios' ? 'black' : '#6CEDFF'}
+                        accessible={true}
+                        accessibilityLabel="Login Button"
+                        accessibilityHint="Click to login"
                     />
                 </View>
 
                 <View style={styles.toggleLoginContainer}>
                     <Text style={styles.loginLineStyle}>Don't have an account?</Text>
-                    <Button title="Sign Up" onPress={() => setLoginPage(false)} ></Button>
+                    <Button 
+                        title="Sign Up" 
+                        onPress={() => setLoginPage(false)} 
+                        accessible={true}
+                        accessibilityLabel="Go to Sign Up Page"
+                        accessibilityHint="Click to go to sign up page"></Button>
                 </View>
 
 
@@ -131,7 +144,7 @@ export default function LoginScreen(props) {
                     <Button
                         title="Sign Up"
                         onPress={() => signUp()}
-                        color='black'
+                        color={Platform.OS === 'ios' ? 'black' : '#6CEDFF'}
                     />
                 </View>
                 <View style={styles.toggleLoginContainer}>

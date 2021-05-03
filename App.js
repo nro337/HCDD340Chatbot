@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         //marginTop: 70,
       },
       android: {
-        height: Dimensions.get("window").height,
+        height: Dimensions.get("window").height + 55,
         //marginTop: 30
       },
       default: {

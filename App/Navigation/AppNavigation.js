@@ -5,6 +5,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-n
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAccessibilityInfo } from '@react-native-community/hooks'
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -13,7 +14,7 @@ import SettingsScreen from '../Screens/SettingsScreen'
 import AssistanceLinksScreen from '../Screens/AssistanceLinksScreen'
 import LegalDisclosureScreen from '../Screens/LegalDisclosureScreen'
 import JournalScreen from '../Screens/JournalScreen'
-import { Button, TouchableOpacity, View, Text } from 'react-native';
+import { Button, TouchableOpacity, View, Text, Platform } from 'react-native';
 import EditEntries from '../Screens/EditEntries';
 
 
@@ -107,7 +108,7 @@ export default function AppNavigation() {
         readThemeState()
     })
     useEffect(() => {
-        console.log(loadState.colors.text + "qwerty")
+        //console.log(loadState.colors.text + "qwerty")
         if (loadState.dark === true) {
             console.log("Update!")
         }

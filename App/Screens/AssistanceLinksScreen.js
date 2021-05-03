@@ -19,9 +19,15 @@ export default function AssistanceLinksScreen({ navigation }) {
                 alignItems: 'center',
                 height: Dimensions.get("screen").height * 0.1,
                 width: Dimensions.get("window").width,
-                backgroundColor: colors.background
+                backgroundColor: colors.background,
+                ...Platform.select({
+                    android: {
+                      paddingTop: 30,
+                      height: Dimensions.get("screen").height * 0.2
+                    }
+                  })
             }}>
-                <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+                <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} accessible={true} accessibilityLabel="Navigation Drawer Menu Button">
                     <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
                 </TouchableOpacity>
                 <Text style={{
@@ -40,44 +46,44 @@ export default function AssistanceLinksScreen({ navigation }) {
                     color: colors.text,
                 }}>Additional Resources</Text>
                 <View style={styles.signOut}>
-                    <Button title='Sign Out' onPress={() => signout()} ></Button>
+                    <Button title='Sign Out' onPress={() => signout()} accessible={true} accessibilityLabel="Sign out Button"></Button>
                 </View>
                 {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>National Suicide Prevention Hotline</Text>
-                    <Button title="Call" onPress={() => Linking.openURL('tel: +18002738255')} ></Button>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18002738255')} accessible={true} accessibilityLabel="National Suicide Prevention Hotline Call Button"></Button>
                 </View>
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>National Domestic Violence Hotline</Text>
-                    <Button title="Call" onPress={() => Linking.openURL('tel: +18007997233')} ></Button>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18007997233')} accessibilityLabel="National Domestic Violence Hotline Call Button"></Button>
                 </View>
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>National Sexual Assault Hotline</Text>
-                    <Button title="Call" onPress={() => Linking.openURL('tel: +18006564673')} ></Button>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18006564673')} accessibilityLabel="National Sexual Assult Hotline Call Button"></Button>
                 </View>
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>SAMHSA Hotline</Text>
-                    <Button title="Call" onPress={() => Linking.openURL('tel: +18006624357')} ></Button>
+                    <Button title="Call" onPress={() => Linking.openURL('tel: +18006624357')} accessibilityLabel="SAMHSA Hotline Call Button"></Button>
                 </View>
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>Free Guided Meditations</Text>
-                    <Button title="Visit" onPress={() => Linking.openURL('https://www.uclahealth.org/marc/mindful-meditations')} ></Button>
+                    <Button title="Visit" onPress={() => Linking.openURL('https://www.uclahealth.org/marc/mindful-meditations')} accessibilityLabel="Link to Guided Meditations Resource"></Button>
                 </View>
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>Headspace Meditations</Text>
-                    <Button title="Visit" onPress={() => Linking.openURL('https://www.headspace.com/covid-19')} ></Button>
+                    <Button title="Visit" onPress={() => Linking.openURL('https://www.headspace.com/covid-19')} accessibilityLabel="Link to free Headspace meditation sessions"></Button>
                 </View>
             </View>
 

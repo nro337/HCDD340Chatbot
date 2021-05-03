@@ -53,10 +53,10 @@ export default function SettingsScreen(props) {
     var user = firebase.auth().currentUser;
     var newPassword = password;
 
-    user.updatePassword(newPassword).then(function() {
+    user.updatePassword(newPassword).then(function () {
       //Update Successful
       firebase.auth().signOut();
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.error(error);
     })
   }
@@ -75,19 +75,26 @@ export default function SettingsScreen(props) {
         // style={{}}
         selectedValue={selectedThemeColor}
         itemStyle={{ backgroundColor: colors.primary }}
+        dropdownIconColor="red"
+        mode='dropdown'
         onValueChange={(itemValue, itemIndex) => { addSelectedThemeColorState(itemValue, itemIndex) }}
+        accessible={true} 
+        accessibilityLabel="Theme picker"
+        accessibilityHint="Choose a theme"
       >
         <Picker.Item label="Light" value="light" />
         <Picker.Item label="Dark" value="dark" />
 
       </Picker>
-      <View style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-        <Text style={{color: colors.text, ...human.title1, textAlign: 'center', paddingTop: 20}}>Change Password</Text>
+      <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Text style={{ ...human.title1, textAlign: 'center', paddingTop: 20, color: colors.text, }}>Change Password</Text>
         <TextInput
           style={[styles.input, { marginTop: 50 }]}
           value={email}
           onChangeText={(email) => setEmail(email)}
           placeholder="Email"
+          accessible={true}
+          accessibilityLabel="Change password email field"
         />
         <TextInput
           style={styles.input}
@@ -95,14 +102,21 @@ export default function SettingsScreen(props) {
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           placeholder="Password"
+          accessible={true}
+          accessibilityLabel="Change password password field"
+          accessibilityHint="Enter new password here"
         />
       </View>
 
-      <View style={styles.loginButton}>
+      <View 
+        style={styles.loginButton} 
+        accessible={true}
+        accessibilityLabel="Update password button">
         <Button
           title='Update Password'
           onPress={() => updateUserPassword(password)}
-          color='black'
+          color={Platform.OS === 'ios' ? 'black' : '#6CEDFF'}
+
         />
       </View>
     </View>

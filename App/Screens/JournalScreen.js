@@ -220,7 +220,7 @@ export default function JournalScreen({ navigation }) {
                     width: Dimensions.get("window").width,
                     backgroundColor: colors.background
                 }}>
-                    <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+                    <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} accessibilityLabel="Navigation Drawer Toggle Menu Button">
                         <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
                     </TouchableOpacity>
                     <Text style={{
@@ -238,7 +238,7 @@ export default function JournalScreen({ navigation }) {
                         }),
                         color: colors.text
                     }}>JournalScreen</Text>
-                    <TouchableOpacity onPress={addSheetState}>
+                    <TouchableOpacity onPress={addSheetState} accessibilityLabel="Add a new journal entry button">
                         <Ionicons name={"add-sharp"} size={32} color={colors.text} style={{ marginRight: 10 }} />
                     </TouchableOpacity>
                     {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}

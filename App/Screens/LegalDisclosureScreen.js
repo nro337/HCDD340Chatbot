@@ -20,8 +20,14 @@ export default function LegalDisclosureScreen({ navigation }) {
                 height: Dimensions.get("screen").height * 0.1,
                 width: Dimensions.get("window").width,
                 backgroundColor: colors.background,
+                ...Platform.select({
+                    android: {
+                      paddingTop: 30,
+                      height: Dimensions.get("screen").height * 0.1
+                    }
+                  })
             }}>
-                <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+                <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} accessibilityLabel="Navigation Drawer Toggle Menu Button">
                     <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
                 </TouchableOpacity>
                 <Text style={{
@@ -40,17 +46,17 @@ export default function LegalDisclosureScreen({ navigation }) {
                     color: colors.text
                 }}>Legal Disclosures</Text>
                 <View style={styles.signOut}>
-                    <Button title='Sign Out' onPress={() => signout()} ></Button>
+                    <Button title='Sign Out' onPress={() => signout()} accessibilityLabel="Sign out Button"></Button>
                 </View>
                 {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
             </View>
             <View style={styles.linkContainer}>
                 <View style={styles.linkRow}>
                     <Text style={{ ...human.title3, color: colors.text }}>Privacy Policy</Text>
-                    <Button title="Visit" onPress={() => Linking.openURL('https://www.freeprivacypolicy.com/live/01b105aa-0981-4e7c-8c9d-046260f1106c')} ></Button>
+                    <Button title="Visit" onPress={() => Linking.openURL('https://www.freeprivacypolicy.com/live/01b105aa-0981-4e7c-8c9d-046260f1106c')} accessibilityLabel="Link to Sanctry privacy policy"></Button>
                 </View>
             </View>
-            <View style={styles.linkContainer}>
+            <View style={styles.linkContainer} >
                 <Text style={{ ...human.title3, color: colors.text }}>Medical Disclosure</Text>
                 <Text style={{
                     textAlign: 'center',

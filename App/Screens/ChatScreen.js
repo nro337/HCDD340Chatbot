@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
-import { ActivityIndicator, Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, Platform } from 'react-native';
+import { useAccessibilityInfo } from '@react-native-community/hooks'
 import * as Linking from 'expo-linking';
 import { useTheme } from '@react-navigation/native';
 import firebase from 'firebase';
@@ -284,14 +285,20 @@ export default function ChatScreen({ navigation }) {
           alignItems: 'center',
           height: Dimensions.get("screen").height * 0.1,
           width: Dimensions.get("window").width,
-          backgroundColor: colors.background
+          backgroundColor: colors.background,
+          ...Platform.select({
+            android: {
+              paddingTop: 30,
+              height: Dimensions.get("screen").height * 0.12
+            }
+          })
         }}>
-          <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+          <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} accessible={true} accessibilityLabel="Navigation Drawer Menu Button">
             <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
           </TouchableOpacity>
           <Image source={Images.robot} style={styles.logo} />
           {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
-          <View style={styles.signOut}>
+          <View style={styles.signOut} accessible={true} accessibilityLabel="Sign out button">
             <Button title='Sign Out' onPress={() => signout()} ></Button>
           </View>
 
@@ -353,6 +360,11 @@ const styles = StyleSheet.create({
   logo: {
     width: "20%",
     height: "70%",
+    ...Platform.select({
+      android: {
+        height: '80%'
+      }
+    })
   },
   messageContainer: {
     display: 'flex',
@@ -361,7 +373,12 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#6CEDFF',
     height: '88%',
-    width: '100%'
+    width: '100%',
+    // ...Platform.select({
+    //   android: {
+    //     paddingBottom: 20
+    //   }
+    // })
   },
   url: {
     textDecorationLine: 'underline',
