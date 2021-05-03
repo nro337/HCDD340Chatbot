@@ -27,7 +27,7 @@ export default function LegalDisclosureScreen({ navigation }) {
             </View>
             <View style={styles.linkContainer}>
                 <Text style={styles.linkRowLabel}>Medical Disclosure</Text>
-                <Text style={styles.medicalDisclosureText}>Santry stands as a voluntary, self-help PTSD chat application. It is not intended nor should ever replace the guidance of a professional therepist, doctor or specialist. Please consult a doctor or therepist immediately if your condition becomes too challenging to maintain yourself.</Text>
+                <Text style={styles.medicalDisclosureText}>Sanctry stands as a voluntary, self-help PTSD chat application. It is not intended nor should ever replace the guidance of a professional therepist, doctor or specialist. Please consult a doctor or therepist immediately if your condition becomes too challenging to maintain yourself.</Text>
             </View>
 
         </View>

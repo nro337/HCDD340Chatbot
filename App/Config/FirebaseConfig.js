@@ -8,7 +8,8 @@ import "firebase/firestore"
     projectId: "santry-chat",
     storageBucket: "santry-chat.appspot.com",
     messagingSenderId: "764333447492",
-    appId: "1:764333447492:web:ef9f3df659f090b48b9f11"
+    appId: "1:764333447492:web:ef9f3df659f090b48b9f11",
+    databaseURL: "https://santry-chat-default-rtdb.firebaseio.com/"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

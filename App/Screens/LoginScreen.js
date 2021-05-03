@@ -62,7 +62,7 @@ export default function LoginScreen(props) {
         return (
             <SafeAreaView style={styles.container}>
 
-                <Text style={styles.titleText}>SANTRY</Text>
+                <Text style={styles.titleText}>SANCTRY</Text>
 
                 <Text style={styles.subtitleText}>Login</Text>
 
@@ -102,7 +102,7 @@ export default function LoginScreen(props) {
         return (
             <SafeAreaView style={styles.container}>
 
-                <Text style={styles.titleText}>SANTRY</Text>
+                <Text style={styles.titleText}>SANCTRY</Text>
 
                 <Text style={styles.subtitleText}>Sign Up</Text>
 

@@ -11,6 +11,7 @@ import ChatScreen from '../Screens/ChatScreen'
 import SettingsScreen from '../Screens/SettingsScreen'
 import AssistanceLinksScreen from '../Screens/AssistanceLinksScreen'
 import LegalDisclosureScreen from '../Screens/LegalDisclosureScreen'
+import JournalScreen from '../Screens/JournalScreen'
 import { Button, TouchableOpacity, View, Text } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -55,6 +56,7 @@ function DrawerStack() {
              */}
             <Drawer.Screen name="Additional Resources" component={AssistanceLinksScreen} />
             <Drawer.Screen name="Legal Disclosure" component={LegalDisclosureScreen} />
+            <Drawer.Screen name="Journaling" component={JournalScreen} />
         </Drawer.Navigator>
     );
 }

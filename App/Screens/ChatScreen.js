@@ -104,7 +104,7 @@ export default function ChatScreen({ navigation }) {
       (welcome[0].text === 'CLEAR') ? setMessages(welcome.slice(1,).reverse()) : setMessages(welcome.slice(0,-1))
     }
     if (index[0].value == "start-conversation.js") {
-      (startconversation[0].text === 'CLEAR') ? setMessages(startconversation.slice(1,).reverse()) : setMessages(startconversation.slice(0,-1))
+      (startconversation[0].text === "That's great!") ? setMessages(startconversation.reverse()) : setMessages(startconversation)
     }
     if (index[0].value == "end-conversation.js") {
       (endconversation[0].text === 'It was nice meeting you!') ? setMessages(endconversation.reverse()) : setMessages(endconversation)
