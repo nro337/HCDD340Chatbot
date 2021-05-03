@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity, Dimensions, FlatList } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, Dimensions, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 import { human } from 'react-native-typography'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTheme } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 import firestore from '../Config/FirebaseConfig';
 import firebase from 'firebase';
@@ -10,21 +11,70 @@ import NewMessageModal from '../Components/NewMessageModal'
 import { Ionicons } from '@expo/vector-icons';
 
 export default function JournalScreen({ navigation }) {
+    const [loading, setLoading] = useState(false);
     const [bottomSheetOpen, setBottomSheetOpen] = useState(0);
     const [messages, setMessages] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
 
     const [bottomSheetState, setBottomSheetState] = useState(bottomSheetState);
+
+    const { colors } = useTheme()
 
     useEffect(() => {
         readSheetOpenState();
     })
 
+    useEffect(() => {
+        
+        reloadJournalEntries()
+        // if (messages.length === 0) {
+        //     postJournalEntry(firebase.auth().currentUser.uid.toString(), "Your first Entry!")
+        //     reloadJournalEntries()
+        // }
+        console.log(messages.length)
+
+
+    },[])
+
+    const onRefresh = React.useCallback(() => {
+
+
+        setRefreshing(true)
+        reloadJournalEntries()
+        setRefreshing(false)
+
+
+    },[])
+
 
     const reloadJournalEntries = () => {
-        getMessages.child('users').child(firebase.auth().currentUser.uid.toString()).child('journal').once('value', (snapshot) => {
 
-            setMessages(snapshot.val())
+        getMessages.child('users').child(firebase.auth().currentUser.uid.toString()).child('journal').once('value', (snapshot) => {
+            if(snapshot.val() === null) {
+                postJournalEntry(firebase.auth().currentUser.uid.toString(), "Your first Entry!")
+                reloadJournalEntries()
+            } else {
+                setLoading(true);
+                setMessages(snapshot.val())
+                setLoading(false)
+            }
+            //console.log(snapshot.val())
+
+
         })
+
+    }
+
+    function postJournalEntry(userId, message) {
+        firebase.database().ref('users/' + userId + '/journal/' + Date.now()).set({
+            date: Date.now(),
+            message: message
+        })
+
+        // textInput.current.clear()
+        // props.reloadJournalEntries()
+        // props.bottomSheetParentState()
+        //handleSnapPress(0)
     }
 
 
@@ -33,16 +83,20 @@ export default function JournalScreen({ navigation }) {
         // if (bottomSheetOpen) {
 
         // }
-        setMessages('')
-        getMessages.child('users').child(firebase.auth().currentUser.uid.toString()).child('journal').once('value', (snapshot) => {
+        //setMessages('')
+        // if (messages.length != 0) {
+        //     getMessages.child('users').child(firebase.auth().currentUser.uid.toString()).child('journal').once('value', (snapshot) => {
+        //         setLoading(true)
+        //         setMessages(snapshot.val())
+        //         setLoading(false)
+        //     })
+        // }
 
-            setMessages(snapshot.val())
-        })
 
-        
 
-        
-    },[])
+
+
+    }, [])
 
     const setSheetStateFromStorage = (boolean) => {
         setBottomSheetState(JSON.parse(boolean));
@@ -88,9 +142,9 @@ export default function JournalScreen({ navigation }) {
 
     const getMessages = firebase.database().ref();
     //console.log(getMessages.child('users').child(firebase.auth().currentUser.uid.toString()).child('journal').get())
-    //console.log(Object.values(messages))
+    //console.log(messages)
 
-    
+
     // Object.values(messages).forEach(element => {
     //     console.log(element)
     // })
@@ -99,34 +153,109 @@ export default function JournalScreen({ navigation }) {
     const renderItem = ({ item }) => (
         //<JournalEntry title={item['message']} />
         //Resource used for converting Date in ms to Date Object: https://www.geeksforgeeks.org/how-to-convert-milliseconds-to-date-in-javascript/ 
-        <View style={styles.item}>
+        <TouchableOpacity style={{
+            borderColor: 'black',
+            borderWidth: 1,
+            padding: 5,
+            backgroundColor: "white",
+        }}
+        onPress={() => navigation.navigate('EditEntries', {myParam: item})}
+        
+        >
             <Text style={styles.itemDate}>{new Date(item["date"]).toLocaleString()}</Text>
             <Text>{item["message"]}</Text>
-        </View>
+        </TouchableOpacity>
     )
 
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
-                    <Ionicons name={"menu"} size={32} color={"black"} style={{ marginLeft: 10 }} />
-                </TouchableOpacity>
-                <Text style={styles.pageTitle}>JournalScreen</Text>
-                <TouchableOpacity onPress={addSheetState}>
-                    <Ionicons name={"add-sharp"} size={32} color={'black'} style={{marginRight: 10}} />
-                </TouchableOpacity>
-                {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
+    if (loading === true) {
+        return (
+            <View style={styles.container}>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    height: Dimensions.get("screen").height * 0.1,
+                    width: Dimensions.get("window").width,
+                    backgroundColor: colors.background
+                }}>
+                    <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+                        <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
+                    </TouchableOpacity>
+                    <Text style={{
+                        ...human.title3,
+                        ...Platform.select({
+                            ios: {
+                                marginLeft: 0,
+                            },
+                            android: {
+                                marginLeft: 0,
+                            },
+                            default: {
+                                marginLeft: 0,
+                            }
+                        }),
+                        color: colors.text
+                    }}>JournalScreen</Text>
+                    <TouchableOpacity onPress={addSheetState}>
+                        <Ionicons name={"add-sharp"} size={32} color={colors.text} style={{ marginRight: 10 }} />
+                    </TouchableOpacity>
+                    {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
+                </View>
+                {/* <ActivityIndicator style={{paddingTop: 30}} size="large" color={colors.primary}/> */}
+
+                {/* <NewMessageModal height={bottomSheetState} reloadJournalEntries={reloadJournalEntries} bottomSheetParentState={addSheetState} /> */}
             </View>
-            <FlatList 
-                data={Object.values(messages)}
-                renderItem={renderItem}
-                keyExtractor={item => item.date.toString()}
-                style={styles.flatlist}
-            />
-            <NewMessageModal height={bottomSheetState} reloadJournalEntries={reloadJournalEntries} bottomSheetParentState={addSheetState} />
-        </View>
-    )
+        )
+    } else {
+        return (
+            <View style={styles.container}>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    height: Dimensions.get("screen").height * 0.1,
+                    width: Dimensions.get("window").width,
+                    backgroundColor: colors.background
+                }}>
+                    <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
+                        <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
+                    </TouchableOpacity>
+                    <Text style={{
+                        ...human.title3,
+                        ...Platform.select({
+                            ios: {
+                                marginLeft: 0,
+                            },
+                            android: {
+                                marginLeft: 0,
+                            },
+                            default: {
+                                marginLeft: 0,
+                            }
+                        }),
+                        color: colors.text
+                    }}>JournalScreen</Text>
+                    <TouchableOpacity onPress={addSheetState}>
+                        <Ionicons name={"add-sharp"} size={32} color={colors.text} style={{ marginRight: 10 }} />
+                    </TouchableOpacity>
+                    {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
+                </View>
+                <FlatList
+                    data={Object.values(messages)}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.date.toString()}
+                    style={styles.flatlist}
+                    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                />
+                <NewMessageModal height={bottomSheetState} reloadJournalEntries={reloadJournalEntries} bottomSheetParentState={addSheetState} />
+            </View>
+        )
+    }
+
+
 
 }
 
@@ -160,7 +289,7 @@ const styles = StyleSheet.create({
                 marginLeft: 0,
             }
         })
-        
+
     },
     linkContainer: {
         display: 'flex',

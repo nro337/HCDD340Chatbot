@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { ActivityIndicator, Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import * as Linking from 'expo-linking';
+import { useTheme } from '@react-navigation/native';
 import firebase from 'firebase';
 import "firebase/auth"
 
@@ -59,6 +60,8 @@ export default function ChatScreen({ navigation }) {
   const [messages, setMessages] = useState([]);
   const [logoutStatus, setLogoutStatus] = useState(false);
 
+  const { colors } = useTheme()
+
   useEffect(() => {
     setMessages(welcome.slice(1,).reverse()
       // [
@@ -101,7 +104,7 @@ export default function ChatScreen({ navigation }) {
     }
 
     if (index[0].value == "welcome.js") {
-      (welcome[0].text === 'CLEAR') ? setMessages(welcome.slice(1,).reverse()) : setMessages(welcome.slice(0,-1))
+      (welcome[0].text === 'CLEAR') ? setMessages(welcome.slice(1,).reverse()) : setMessages(welcome.slice(0, -1))
     }
     if (index[0].value == "start-conversation.js") {
       (startconversation[0].text === "That's great!") ? setMessages(startconversation.reverse()) : setMessages(startconversation)
@@ -110,55 +113,55 @@ export default function ChatScreen({ navigation }) {
       (endconversation[0].text === 'It was nice meeting you!') ? setMessages(endconversation.reverse()) : setMessages(endconversation)
     }
     if (index[0].value == "menu.js") {
-      (menu[0].text === 'CLEAR') ? setMessages(menu.slice(1,).reverse()) : setMessages(menu.slice(0,-1))
+      (menu[0].text === 'CLEAR') ? setMessages(menu.slice(1,).reverse()) : setMessages(menu.slice(0, -1))
     }
     if (index[0].value == "daily-check/init.js") {
-      (daily_check_init[0].text === 'CLEAR') ? setMessages(daily_check_init.slice(1,).reverse()) : setMessages(daily_check_init.slice(0,-1))
+      (daily_check_init[0].text === 'CLEAR') ? setMessages(daily_check_init.slice(1,).reverse()) : setMessages(daily_check_init.slice(0, -1))
     }
     if (index[0].value == "activities.js") {
-      (activities[0].text === 'CLEAR') ? setMessages(activities.slice(1,).reverse()) : setMessages(activities.slice(0,-1))
+      (activities[0].text === 'CLEAR') ? setMessages(activities.slice(1,).reverse()) : setMessages(activities.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/init.js") {
-      (manage_symptoms_init[0].text === 'CLEAR') ? setMessages(manage_symptoms_init.slice(1,).reverse()) : setMessages(manage_symptoms_init.slice(0,-1))
+      (manage_symptoms_init[0].text === 'CLEAR') ? setMessages(manage_symptoms_init.slice(1,).reverse()) : setMessages(manage_symptoms_init.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/perspective-change/init.js") {
       (manage_symptoms_perspective_change_init[0].text === 'Changing the way you think can change the way you feel') ? setMessages(manage_symptoms_perspective_change_init.reverse()) : setMessages(manage_symptoms_perspective_change_init)
     }
     if (index[0].value == "manage-symptoms/perspective-change/1.js") {
-      (manage_symptoms_perspective_change_1[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_1.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_1.slice(0,-1))
+      (manage_symptoms_perspective_change_1[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_1.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_1.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/perspective-change/2.js") {
-      (manage_symptoms_perspective_change_2[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_2.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_2.slice(0,-1))
+      (manage_symptoms_perspective_change_2[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_2.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_2.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/perspective-change/3.js") {
-      (manage_symptoms_perspective_change_3[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_3.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_3.slice(0,-1))
+      (manage_symptoms_perspective_change_3[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_3.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_3.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/perspective-change/4.js") {
-      (manage_symptoms_perspective_change_4[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_4.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_4.slice(0,-1))
+      (manage_symptoms_perspective_change_4[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_4.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_4.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/perspective-change/5.js") {
-      (manage_symptoms_perspective_change_5[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_5.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_5.slice(0,-1))
+      (manage_symptoms_perspective_change_5[0].text === 'CLEAR') ? setMessages(manage_symptoms_perspective_change_5.slice(1,).reverse()) : setMessages(manage_symptoms_perspective_change_5.slice(0, -1))
     }
     if (index[0].value == "manage-symptoms/feel-good.js") {
       (manage_symptoms_feel_good[0].text === 'Great!') ? setMessages(manage_symptoms_feel_good.reverse()) : setMessages(manage_symptoms_feel_good)
     }
     if (index[0].value == "get-support/tool-list.js") {
-      (get_support_tool_list[0].text === 'CLEAR') ? setMessages(get_support_tool_list.slice(1,).reverse()) : setMessages(get_support_tool_list.slice(0,-1))
+      (get_support_tool_list[0].text === 'CLEAR') ? setMessages(get_support_tool_list.slice(1,).reverse()) : setMessages(get_support_tool_list.slice(0, -1))
     }
     if (index[0].value == "take-assessment/start.js") {
       (take_assessment_start[0].text === "Great! Let's get started.") ? setMessages(take_assessment_start.reverse()) : setMessages(take_assessment_start)
     }
     if (index[0].value == "take-assessment/survey.js") {
-      (take_assessment_survey[0].text === 'CLEAR') ? setMessages(take_assessment_survey.slice(1,).reverse()) : setMessages(take_assessment_survey.slice(0,-1))
+      (take_assessment_survey[0].text === 'CLEAR') ? setMessages(take_assessment_survey.slice(1,).reverse()) : setMessages(take_assessment_survey.slice(0, -1))
     }
     if (index[0].value == "take-assessment/score.js") {
       (take_assessment_score[0].text === 'Thank you for answering the questions!') ? setMessages(take_assessment_score.reverse()) : setMessages(take_assessment_score)
     }
     if (index[0].value == "take-assessment/result.js") {
-      (take_assessment_result[0].text === 'CLEAR') ? setMessages(take_assessment_result.slice(1,).reverse()) : setMessages(take_assessment_result.slice(0,-1))
+      (take_assessment_result[0].text === 'CLEAR') ? setMessages(take_assessment_result.slice(1,).reverse()) : setMessages(take_assessment_result.slice(0, -1))
     }
     if (index[0].value == "take-assessment/high.js") {
-      (take_assessment_high[0].text === 'CLEAR') ? setMessages(take_assessment_high.slice(1,).reverse()) : setMessages(take_assessment_high.slice(0,-1))
+      (take_assessment_high[0].text === 'CLEAR') ? setMessages(take_assessment_high.slice(1,).reverse()) : setMessages(take_assessment_high.slice(0, -1))
     }
     if (index[0].value == "get-support/immediate.js") {
       (get_support_immediate[0].text === 'I would like to provide contacts that you could get some immediate support.') ? setMessages(get_support_immediate.reverse()) : setMessages(get_support_immediate)
@@ -171,22 +174,22 @@ export default function ChatScreen({ navigation }) {
       (get_support_other_tools[0].text === 'I have some other tools that might help you.') ? setMessages(get_support_other_tools.reverse()) : setMessages(get_support_other_tools)
     }
     if (index[0].value == "take-assessment/low.js") {
-      (take_assessment_low[0].text === 'CLEAR') ? setMessages(take_assessment_low.slice(1,).reverse()) : setMessages(take_assessment_low.slice(0,-1))
+      (take_assessment_low[0].text === 'CLEAR') ? setMessages(take_assessment_low.slice(1,).reverse()) : setMessages(take_assessment_low.slice(0, -1))
     }
     if (index[0].value == "learn-more/init.js") {
-      (learn_more_init[0].text === 'CLEAR') ? setMessages(learn_more_init.slice(1,).reverse()) : setMessages(learn_more_init.slice(0,-1))
+      (learn_more_init[0].text === 'CLEAR') ? setMessages(learn_more_init.slice(1,).reverse()) : setMessages(learn_more_init.slice(0, -1))
     }
     if (index[0].value == "learn-more/symptoms/init.js") {
-      (learn_more_symptoms_init[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_init.slice(1,).reverse()) : setMessages(learn_more_symptoms_init.slice(0,-1))
+      (learn_more_symptoms_init[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_init.slice(1,).reverse()) : setMessages(learn_more_symptoms_init.slice(0, -1))
     }
     if (index[0].value == "learn-more/symptoms/intro/first.js") {
-      (learn_more_symptoms_intro_first[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_first.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_first.slice(0,-1))
+      (learn_more_symptoms_intro_first[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_first.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_first.slice(0, -1))
     }
     if (index[0].value == "learn-more/symptoms/examples/first.js") {
       (learn_more_symptoms_examples_first[0].text === 'If someone is under re-experiencing or reliving the trauma, he/she might experience: disturbing memories, nightmares, feeling or acting like the trauma is happening again, and/or becoming very upset when reminded of the trauma.') ? setMessages(learn_more_symptoms_examples_first.reverse()) : setMessages(learn_more_symptoms_examples_first)
     }
     if (index[0].value == "learn-more/symptoms/intro/second.js") {
-      (learn_more_symptoms_intro_second[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_second.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_second.slice(0,-1))
+      (learn_more_symptoms_intro_second[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_second.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_second.slice(0, -1))
     }
     if (index[0].value == "learn-more/symptoms/examples/second.js") {
       (learn_more_symptoms_examples_second[0].text === 'If someone shows persistent avoidance, he/she might experience: avoiding places, people or conversations that remind you of the trauma, and/or avoiding thoughts, feelings, or memories closely associated with traumatic events.') ? setMessages(learn_more_symptoms_examples_second.reverse()) : setMessages(learn_more_symptoms_examples_second)
@@ -198,7 +201,7 @@ export default function ChatScreen({ navigation }) {
       (learn_more_symptoms_examples_third[0].text === 'If someone feel negative thoughts and moods, he/she might have: feeling detached or isolating from others, negative beliefs, self-blame for the trauma, and/or trouble feeling positive emotions like happiness and love.') ? setMessages(learn_more_symptoms_examples_third.reverse()) : setMessages(learn_more_symptoms_examples_third)
     }
     if (index[0].value == "learn-more/symptoms/intro/fourth.js") {
-      (learn_more_symptoms_intro_fourth[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_fourth.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_fourth.slice(0,-1))
+      (learn_more_symptoms_intro_fourth[0].text === 'CLEAR') ? setMessages(learn_more_symptoms_intro_fourth.slice(1,).reverse()) : setMessages(learn_more_symptoms_intro_fourth.slice(0, -1))
     }
     if (index[0].value == "learn-more/symptoms/examples/fourth.js") {
       (learn_more_symptoms_examples_fourth[0].text === 'If someone feel more on-edge and reactive, he/she might experience: feeling on guard, being irritable or angry, trouble sleeping, and/or startling easily.') ? setMessages(learn_more_symptoms_examples_fourth.reverse()) : setMessages(learn_more_symptoms_examples_fourth)
@@ -216,7 +219,7 @@ export default function ChatScreen({ navigation }) {
       (learn_more_symptoms_review[0].text === 'Ok. Which symptom would you like to review?') ? setMessages(learn_more_symptoms_review.reverse()) : setMessages(learn_more_symptoms_review)
     }
     if (index[0].value == "learn-more/facts/init.js") {
-      (learn_more_facts_init[0].text === 'CLEAR') ? setMessages(learn_more_facts_init.slice(1,).reverse()) : setMessages(learn_more_facts_init.slice(0,-1))
+      (learn_more_facts_init[0].text === 'CLEAR') ? setMessages(learn_more_facts_init.slice(1,).reverse()) : setMessages(learn_more_facts_init.slice(0, -1))
     }
     if (index[0].value == "learn-more/facts/next.js") {
       (learn_more_facts_next[0].text === 'Over 600,000 Veterans who used Veterans Affair services as recently as 2016 were diagnosed with PTSD') ? setMessages(learn_more_facts_next.reverse()) : setMessages(learn_more_facts_next)
@@ -230,9 +233,17 @@ export default function ChatScreen({ navigation }) {
   } else {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
+        <View style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          height: Dimensions.get("screen").height * 0.1,
+          width: Dimensions.get("window").width,
+          backgroundColor: colors.background
+        }}>
           <TouchableOpacity onPress={() => navigation.toggleDrawer()} title="DrawerStack" style={styles.menuButton} >
-            <Ionicons name={"menu"} size={32} color={"black"} style={{ marginLeft: 10 }} />
+            <Ionicons name={"menu"} size={32} color={colors.text} style={{ marginLeft: 10 }} />
           </TouchableOpacity>
           <Image source={Images.robot} style={styles.logo} />
           {/* <Button title="abc" onPress={() => navigation.toggleDrawer()}></Button> */}
@@ -246,7 +257,7 @@ export default function ChatScreen({ navigation }) {
             messages={messages}
             onSend={messages => onSend(messages)}
             onQuickReply={(message) => fetchFile(message)}
-            quickReplyStyle={{backgroundColor: '#FAFF00'}}
+            quickReplyStyle={{ backgroundColor: '#FAFF00' }}
             parsePatterns={(linkStyle) => [
               { type: 'url', style: styles.url, onPress: () => handleUrlPress(link) },
             ]}

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -13,6 +14,8 @@ import AssistanceLinksScreen from '../Screens/AssistanceLinksScreen'
 import LegalDisclosureScreen from '../Screens/LegalDisclosureScreen'
 import JournalScreen from '../Screens/JournalScreen'
 import { Button, TouchableOpacity, View, Text } from 'react-native';
+import EditEntries from '../Screens/EditEntries';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +50,20 @@ function HomeStack({ navigation }) {
     );
 }
 
+const Stack2 = createStackNavigator()
+function JournalStack() {
+    return (
+        <Stack2.Navigator
+          screenOptions={{
+            // headerStyle: {backgroundColor: "white"},
+          }}
+        >
+            <Stack2.Screen name="Journaling" component={JournalScreen} />
+            <Stack2.Screen name="EditEntries" component={EditEntries} />
+        </Stack2.Navigator>
+      );
+}
+
 const Drawer = createDrawerNavigator();
 function DrawerStack() {
     return (
@@ -56,14 +73,49 @@ function DrawerStack() {
              */}
             <Drawer.Screen name="Additional Resources" component={AssistanceLinksScreen} />
             <Drawer.Screen name="Legal Disclosure" component={LegalDisclosureScreen} />
-            <Drawer.Screen name="Journaling" component={JournalScreen} />
+            {/* <Drawer.Screen name="Journaling" component={JournalScreen} /> */}
+            <Drawer.Screen name="Journaling" component={JournalStack} />
         </Drawer.Navigator>
     );
 }
 
 export default function AppNavigation() {
+    const [currentTheme, setCurrentTheme] = useState(DefaultTheme)
+    var loadState = currentTheme;
+
+    const readThemeState = async () => {
+        try {
+          const storage_state = await AsyncStorage.getItem('selectedThemeColor');
+          //console.log(storage_state)
+          if (storage_state === '"light"') {
+              setCurrentTheme(DefaultTheme)
+              console.log("---")
+              console.log(storage_state)
+              console.log(currentTheme)
+            //setVegetableStateFromStorage(storage_state);
+            //console.log(storage_state)
+          } else if (storage_state == '"dark"') {
+              setCurrentTheme(DarkTheme)
+              console.log("nice")
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    
+    useEffect(() => {
+        readThemeState()
+    })
+    useEffect(() => {
+        console.log(loadState.colors.text + "qwerty")
+        if (loadState.dark === true) {
+            console.log("Update!")
+        }
+    })
+
+
     return (
-        <NavigationContainer >
+        <NavigationContainer theme={currentTheme} >
             <Tab.Navigator
                 initialRouteName='Chat'
                 screenOptions={({ route }) => ({
@@ -85,7 +137,7 @@ export default function AppNavigation() {
                 })}
                 // tabBar={PlantsScreen}
                 tabBarOptions={{
-                    activeTintColor: "black",
+                    activeTintColor: currentTheme.colors.text,
                     showLabel: true,
                     // ...Platform.select({
                     //   ios: {
@@ -113,7 +165,7 @@ export default function AppNavigation() {
                     //tabStyle: {marginBottom: 30}
                 }}>
                 <Tab.Screen name="Chat" component={HomeStack} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
+                <Tab.Screen name="Settings" component={SettingsScreen}/>
             </Tab.Navigator>
         </NavigationContainer>
     );

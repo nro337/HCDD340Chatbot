@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo, useRef, useEffect } from "react"
 import { Alert, Modal, StyleSheet, Text, Pressable, View, Button, Dimensions, TextInput, Keyboard } from "react-native";
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { human } from "react-native-typography";
+import { useTheme } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '../Config/FirebaseConfig';
 import firebase from 'firebase';
@@ -10,10 +11,12 @@ const NewMessageModal = (props) => {
     const [bottomSheetState, setBottomSheetState] = useState(bottomSheetState);
     const [inputText, setInputText] = useState("")
 
+    const { colors } = useTheme()
+
     useEffect(() => {
         //console.log("bottomSheetOpen: " + props.bottomSheetParentState())
         //readSheetOpenState();
-    } )
+    })
 
     useEffect(() => {
         if (props.height === false) {
@@ -21,10 +24,10 @@ const NewMessageModal = (props) => {
         }
 
         if (props.height === true) {
-            StyleSheet.compose(styles.container, styles.container2)
+            //StyleSheet.compose(styles.container, styles.container2)
             handleSnapPress(2)
-            
-            
+
+
         }
         console.log("Bottom sheet open: " + props.bottomSheetState)
     })
@@ -101,7 +104,7 @@ const NewMessageModal = (props) => {
     //Example utilized directly with credit from https://gorhom.github.io/react-native-bottom-sheet/scrollables#bottomsheetview
     //console.log(props.height)
     // hooks
-    const sheetRef = useRef(<BottomSheet/>);
+    const sheetRef = useRef(<BottomSheet />);
 
     // variables
     // const data = useMemo(
@@ -114,7 +117,7 @@ const NewMessageModal = (props) => {
 
 
 
-    const snapPoints = useMemo(() => [0,'10%', '100%'], []);
+    const snapPoints = useMemo(() => [0, '10%', '100%'], []);
 
     // callbacks
     const handleSheetChange = useCallback(index => {
@@ -141,7 +144,7 @@ const NewMessageModal = (props) => {
     // if (props.height == 0) {
     //     //handleSnapPress(0)
     // }
-    
+
     // console.log(props.height + "1")
     // console.log(bottomSheetState + "2")
     // if(bottomSheetState === false) {
@@ -163,27 +166,50 @@ const NewMessageModal = (props) => {
             <Button title="Snap To 50%" onPress={() => handleSnapPress(1)} />
             <Button title="Snap To 25%" onPress={() => handleSnapPress(0)} />
             <Button title="Close" onPress={() => handleClosePress()} /> */}
-            
+
             <BottomSheet
                 ref={sheetRef}
                 index={0}
                 snapPoints={snapPoints}
                 onChange={handleSheetChange}
             >
-                <BottomSheetView style={styles.contentContainer}>
-                    <View style={styles.bottomSheetHeader}>
-                        <Text style={styles.bottomSheetHeader}>New Journal Entry</Text>
+                <BottomSheetView style={{
+                    backgroundColor: colors.background,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    <View style={{backgroundColor: colors.background}}>
+                        <Text style={{
+                            ...human.title1,
+                            textAlign: 'center',
+                            color: colors.text
+                        }}>New Journal Entry</Text>
                         <Button title='Close' onPress={props.bottomSheetParentState}></Button>
-                        <TextInput 
+                        <TextInput
                             placeholder="Enter journal entry here..."
                             editable={true}
                             multiline={true}
-                            style={styles.messageText}
+                            style={{
+                                height: Dimensions.get('screen').height * 0.3,
+                                width: Dimensions.get('screen').width * 0.8,
+                                backgroundColor: "white",
+                                borderColor: 'black',
+                                borderWidth: 2,
+                                borderRadius: 8,
+                                backgroundColor: colors.background,
+                                color: colors.text,
+                                borderTopColor: colors.text,
+                                borderLeftColor: colors.text,
+                                borderRightColor: colors.text,
+                                borderBottomColor: colors.text
+                            }}
                             onChangeText={setInputText}
                             // onFocus={() => setTextFocus(true)}
                             ref={textInput}
                             onSubmitEditing={Keyboard.dismiss}
-                            
+
                         />
                         <Button title="Post" onPress={() => postJournalEntry(firebase.auth().currentUser.uid, inputText.trim())}></Button>
                         {/* () => postJournalEntry(firebase.auth().currentUser.uid, 'Wow what a message__') */}
@@ -259,15 +285,15 @@ const NewMessageModal = (props) => {
 };
 
 const styles = StyleSheet.create({
-      container: {
+    container: {
         //flex: 1,
         //display: "none",
         width: Dimensions.get('screen').width,
         height: Dimensions.get('screen').height * 1.2,
         paddingTop: 0,
         //paddingBottom: 50
-      },
-      container2: {
+    },
+    container2: {
         ...StyleSheet.absoluteFill,
         top: 120,
         left: 50,
@@ -281,8 +307,8 @@ const styles = StyleSheet.create({
         // height: Dimensions.get('screen').height * 1.2,
         // paddingTop: 0,
         // //paddingBottom: 50
-      },
-      contentContainer: {
+    },
+    contentContainer: {
         //position: "absolute",
         //zIndex: 5,
         backgroundColor: 'white',
@@ -290,12 +316,12 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center"
-      },
-      itemContainer: {
+    },
+    itemContainer: {
         padding: 6,
         margin: 6,
         backgroundColor: '#eee',
-      },
+    },
     centeredView: {
         flex: 1,
         justifyContent: "center",
