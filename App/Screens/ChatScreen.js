@@ -20,6 +20,7 @@ import manage_symptoms_perspective_change_3 from '../Data/persona1/manage-sympto
 import manage_symptoms_perspective_change_4 from '../Data/persona1/manage-symptoms/perspective-change/4'
 import manage_symptoms_perspective_change_5 from '../Data/persona1/manage-symptoms/perspective-change/5'
 import manage_symptoms_feel_good from '../Data/persona1/manage-symptoms/feel-good'
+import manage_symptoms_feel_bad from '../Data/persona1/manage-symptoms/feel-bad'
 import get_support_tool_list from '../Data/persona1/get-support/tool-list'
 import take_assessment_start from '../Data/persona1/take-assessment/start'
 import take_assessment_survey from '../Data/persona1/take-assessment/survey'
@@ -45,6 +46,16 @@ import learn_more_repeat from '../Data/persona1/learn-more/repeat'
 import learn_more_symptoms_review from '../Data/persona1/learn-more/symptoms/review'
 import learn_more_facts_init from '../Data/persona1/learn-more/facts/init'
 import learn_more_facts_next from '../Data/persona1/learn-more/facts/next'
+import daily_check_survey from '../Data/persona1/daily-check/survey'
+import daily_check_score from '../Data/persona1/daily-check/score'
+import daily_check_good from '../Data/persona1/daily-check/good'
+import daily_check_bad from '../Data/persona1/daily-check/bad'
+import manage_symptoms_positive_images_init from '../Data/persona1/manage-symptoms/positive-images/init'
+import manage_symptoms_positive_images_1 from '../Data/persona1/manage-symptoms/positive-images/1'
+import manage_symptoms_positive_images_2 from '../Data/persona1/manage-symptoms/positive-images/2'
+import manage_symptoms_positive_images_3 from '../Data/persona1/manage-symptoms/positive-images/3'
+import manage_symptoms_positive_images_4 from '../Data/persona1/manage-symptoms/positive-images/4'
+import manage_symptoms_positive_images_5 from '../Data/persona1/manage-symptoms/positive-images/5'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -145,6 +156,9 @@ export default function ChatScreen({ navigation }) {
     if (index[0].value == "manage-symptoms/feel-good.js") {
       (manage_symptoms_feel_good[0].text === 'Great!') ? setMessages(manage_symptoms_feel_good.reverse()) : setMessages(manage_symptoms_feel_good)
     }
+    if (index[0].value == "manage-symptoms/feel-bad.js") {
+      (manage_symptoms_feel_bad[0].text === 'I can relieve your symptom in different ways,') ? setMessages(manage_symptoms_feel_bad.reverse()) : setMessages(manage_symptoms_feel_bad)
+    }
     if (index[0].value == "get-support/tool-list.js") {
       (get_support_tool_list[0].text === 'CLEAR') ? setMessages(get_support_tool_list.slice(1,).reverse()) : setMessages(get_support_tool_list.slice(0, -1))
     }
@@ -223,6 +237,36 @@ export default function ChatScreen({ navigation }) {
     }
     if (index[0].value == "learn-more/facts/next.js") {
       (learn_more_facts_next[0].text === 'Over 600,000 Veterans who used Veterans Affair services as recently as 2016 were diagnosed with PTSD') ? setMessages(learn_more_facts_next.reverse()) : setMessages(learn_more_facts_next)
+    }
+    if (index[0].value == "daily-check/survey.js") {
+      (daily_check_survey[0].text === "Great! Let's start it") ? setMessages(daily_check_survey.reverse()) : setMessages(daily_check_survey)
+    }
+    if (index[0].value == "daily-check/score.js") {
+      (daily_check_score[0].text === "CLEAR") ? setMessages(daily_check_score.slice(1,).reverse()) : setMessages(daily_check_score.slice(0, -1))
+    }
+    if (index[0].value == "daily-check/good.js") {
+      (daily_check_good[0].text === "CLEAR") ? setMessages(daily_check_good.slice(1,).reverse()) : setMessages(daily_check_good.slice(0, -1))
+    }
+    if (index[0].value == "daily-check/bad.js") {
+      (daily_check_bad[0].text === "CLEAR") ? setMessages(daily_check_bad.slice(1,).reverse()) : setMessages(daily_check_bad.slice(0, -1))
+    }
+    if (index[0].value == "manage-symptoms/positive-images/init.js") {
+      (manage_symptoms_positive_images_init[0].text === "Looking something pleasant helps you relax and positive") ? setMessages(manage_symptoms_positive_images_init.reverse()) : setMessages(manage_symptoms_positive_images_init)
+    }
+    if (index[0].value == "manage-symptoms/positive-images/1.js") {
+      (manage_symptoms_positive_images_1[0].text === "CLEAR") ? setMessages(manage_symptoms_positive_images_1.slice(1,).reverse()) : setMessages(manage_symptoms_positive_images_1.slice(0, -1))
+    }
+    if (index[0].value == "manage-symptoms/positive-images/2.js") {
+      (manage_symptoms_positive_images_2[0].text === "CLEAR") ? setMessages(manage_symptoms_positive_images_2.slice(1,).reverse()) : setMessages(manage_symptoms_positive_images_2.slice(0, -1))
+    }
+    if (index[0].value == "manage-symptoms/positive-images/3.js") {
+      (manage_symptoms_positive_images_3[0].text === "CLEAR") ? setMessages(manage_symptoms_positive_images_3.slice(1,).reverse()) : setMessages(manage_symptoms_positive_images_3.slice(0, -1))
+    }
+    if (index[0].value == "manage-symptoms/positive-images/4.js") {
+      (manage_symptoms_positive_images_4[0].text === "CLEAR") ? setMessages(manage_symptoms_positive_images_4.slice(1,).reverse()) : setMessages(manage_symptoms_positive_images_4.slice(0, -1))
+    }
+    if (index[0].value == "manage-symptoms/positive-images/5.js") {
+      (manage_symptoms_positive_images_5[0].text === "CLEAR") ? setMessages(manage_symptoms_positive_images_5.slice(1,).reverse()) : setMessages(manage_symptoms_positive_images_5.slice(0, -1))
     }
   }
 

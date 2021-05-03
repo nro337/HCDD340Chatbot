@@ -34,9 +34,9 @@ const NewMessageModal = (props) => {
 
     const textInput = useRef(null)
 
-    function postJournalEntry(userId, message) {
-        firebase.database().ref('users/' + userId + '/journal/' + Date.now()).set({
-            date: Date.now(),
+    function postJournalEntry(userId, date, message) {
+        firebase.database().ref('users/' + userId + '/journal/' + date).set({
+            date: date,
             message: message
         })
 
@@ -192,7 +192,7 @@ const NewMessageModal = (props) => {
                             editable={true}
                             multiline={true}
                             style={{
-                                height: Dimensions.get('screen').height * 0.3,
+                                height: Dimensions.get('screen').height * 0.2,
                                 width: Dimensions.get('screen').width * 0.8,
                                 backgroundColor: "white",
                                 borderColor: 'black',
@@ -211,7 +211,7 @@ const NewMessageModal = (props) => {
                             onSubmitEditing={Keyboard.dismiss}
 
                         />
-                        <Button title="Post" onPress={() => postJournalEntry(firebase.auth().currentUser.uid, inputText.trim())}></Button>
+                        <Button title="Post" onPress={() => postJournalEntry(firebase.auth().currentUser.uid, Date.now(), inputText.trim())}></Button>
                         {/* () => postJournalEntry(firebase.auth().currentUser.uid, 'Wow what a message__') */}
                     </View>
 
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
         //flex: 1,
         //display: "none",
         width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height * 1.2,
+        height: Dimensions.get('screen').height,
         paddingTop: 0,
         //paddingBottom: 50
     },

@@ -24,20 +24,29 @@ export default function EditEntries({ navigation, route }) {
 
 
     function updateJournalEntry(userId, date, message) {
+        var newDate = Date.now()
 
         var postData = {
-            date: date,
+            date: newDate,
             message: message
         }
 
         //Get a key for updated entry
-        var newKey = firebase.database().ref('users/' + userId + '/journal/' + date).push().key;
+        var newKey = firebase.database().ref('users/' + userId + '/journal/' + newDate).push().key;
 
         var updates = {}
-        updates['users/' + userId + '/journal/' + date] = postData;
+        updates['users/' + userId + '/journal/' + newDate] = postData;
         //navigation.goBack();
 
-        
+        deleteJournalEntry(userId, date, message);
+
+        // firebase.database().ref('users/' + userId + '/journal/' + date).remove()
+        // .then(function() {
+        //     console.log("Remove succeeded.")
+        //   })
+        //   .catch(function(error) {
+        //     console.log("Remove failed: " + error.message)
+        //   });;
 
         return firebase.database().ref().update(updates);
 
@@ -65,6 +74,7 @@ export default function EditEntries({ navigation, route }) {
     function deleteJournalEntry(userId, date, message) {
         //firebase.database().ref('users/' + userId + '/journal/' + date).remove()
         //return firebase.database().ref('users/' + userId + '/journal/' + date).update({}, null);
+        console.log(date)
 
         var postData = {
             date: date,

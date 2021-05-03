@@ -163,7 +163,7 @@ export default function JournalScreen({ navigation }) {
         
         >
             <Text style={styles.itemDate}>{new Date(item["date"]).toLocaleString()}</Text>
-            <Text>{item["message"]}</Text>
+            <Text style={{overflow: 'hidden'}}>{item["message"]}</Text>
         </TouchableOpacity>
     )
 
