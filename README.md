@@ -11,4 +11,4 @@ HCDD 340 Final Project - PTSD Chatbot
 * If you are using a Windows device, you may need to install Visual Studio 2019
 	* Within Visual Studio 2019, you will need to install the "Desktop development with C++" workload. This is required for a dependency related to Firebase and Gifted Chat.
 
-* Once these are all installed, please download necessay dependencies using the `npm install` command. Thge project will be runnable with the `expo start` command.
+* Once these are all installed, please download necessay dependencies using the `npm install` command. The project will be runnable with the `expo start` command.
